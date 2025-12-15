@@ -1,0 +1,21 @@
+<h2>Deteksi Batu Ginjal</h2>
+
+<form method="post" enctype="multipart/form-data">
+  <input type="file" name="file" required>
+  <button type="submit">Prediksi</button>
+</form>
+
+{% if result %}
+  <hr>
+
+  <h3>Hasil Deteksi: {{ result }}</h3>
+
+  <p>
+    Tingkat kepercayaan:
+    <strong>{{ (confidence * 100) | round(2) }}%</strong>
+  </p>
+
+  <p style="color:red; font-size:12px;">
+    ⚠️ Aplikasi ini hanya untuk skrining awal dan bukan pengganti diagnosis dokter.
+  </p>
+{% endif %}
