@@ -1,5 +1,23 @@
-<h2>Mengapa Aplikasi Ini Penting?</h2>
-<p>
-Batu ginjal sering tidak terdeteksi dini.
-Aplikasi ini membantu skrining awal menggunakan kecerdasan buatan.
-</p>
+{% extends "base.html" %}
+{% block content %}
+
+<section class="section bg-white">
+  <div class="container">
+    <h2>Tentang MediKidney</h2>
+    <p>
+      MediKidney adalah aplikasi berbasis web untuk membantu
+      skrining awal batu ginjal menggunakan citra CT Scan.
+    </p>
+  </div>
+</section>
+
+<section class="section bg-light">
+  <div class="container">
+    <p>
+      Aplikasi ini dikembangkan sebagai proyek akademik dan
+      tidak digunakan sebagai alat diagnosis medis.
+    </p>
+  </div>
+</section>
+
+{% endblock %}

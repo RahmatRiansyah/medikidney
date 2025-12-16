@@ -1,21 +1,160 @@
-<h2>Deteksi Batu Ginjal</h2>
+{% extends "base.html" %}
+{% block content %}
 
-<form method="post" enctype="multipart/form-data">
-  <input type="file" name="file" required>
-  <button type="submit">Prediksi</button>
-</form>
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="/" class="text-decoration-none text-muted small">
+            <i class="fas fa-arrow-left me-1"></i> Kembali / Beranda
+        </a>
+        <h5 class="fw-bold mb-0 text-dark">Deteksi Penyakit Ginjal</h5>
+    </div>
 
-{% if result %}
-  <hr>
+    <div class="row g-4">
 
-  <h3>Hasil Deteksi: {{ result }}</h3>
+        <!-- ================= UPLOAD (KIRI) ================= -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm rounded-4 upload-card p-3">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-1">Unggah Citra Ginjal</h5>
+                    <p class="text-muted small mb-4">
+                        Unggah CT scan atau MRI image untuk dianalisis
+                    </p>
 
-  <p>
-    Tingkat kepercayaan:
-    <strong>{{ (confidence * 100) | round(2) }}%</strong>
-  </p>
+                    <form method="post" enctype="multipart/form-data" id="predictForm">
+                        
+                        <div class="upload-area text-center p-5 rounded-3 position-relative">
+                            
+                            <!-- PREVIEW IMAGE -->
+                            <img id="imagePreview"
+                                 class="img-fluid rounded shadow-sm mb-3 d-none"
+                                 style="max-height: 220px;" />
 
-  <p style="color:red; font-size:12px;">
-    ⚠️ Aplikasi ini hanya untuk skrining awal dan bukan pengganti diagnosis dokter.
-  </p>
-{% endif %}
+                            <!-- PLACEHOLDER -->
+                            <div id="uploadPlaceholder">
+                                <div class="mb-3">
+                                    <i class="far fa-file-image fa-3x text-secondary"></i>
+                                </div>
+                                <h5 class="fw-bold text-dark">Drop your image here</h5>
+                                <p class="text-muted small mb-1">
+                                    atau klik untuk mencari file
+                                </p>
+                                <p class="text-muted small">
+                                    JPG / PNG
+                                </p>
+                            </div>
+
+                            <!-- FILE INPUT -->
+                            <input class="form-control"
+                                   type="file"
+                                   name="file"
+                                   id="fileInput"
+                                   accept="image/*"
+                                   required>
+                        </div>
+
+                        <!-- FILE NAME -->
+                        <p class="text-muted small mt-2" id="fileName">
+                            Belum ada file dipilih
+                        </p>
+
+                        <!-- SUBMIT -->
+                        <div class="d-grid mt-3">
+                            <button type="submit"
+                                    class="btn btn-secondary py-3 rounded-3 fw-bold btn-gray-upload"
+                                    id="submitBtn">
+                                <i class="fas fa-upload me-2"></i> Mulai Analisis
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- LOADING -->
+                    <div id="loading" class="text-center mt-3 d-none">
+                        <div class="spinner-border text-primary"></div>
+                        <p class="small text-muted mt-2">
+                            Sedang menganalisis citra...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= HASIL (KANAN) ================= -->
+        <div class="col-lg-6">
+
+            {% if not result %}
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white">
+                <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+                    <i class="far fa-file fa-5x text-light-gray mb-3"></i>
+                    <h5 class="fw-bold text-muted">Belum Ada Hasil</h5>
+                    <p class="text-muted">
+                        Unggah gambar dan mulai analisis untuk melihat hasil
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if result %}
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3 text-success">
+                        <i class="fas fa-check-circle me-2"></i> Hasil Analisis
+                    </h5>
+
+                    <div class="alert bg-light-blue border-0 py-3">
+                        <p class="mb-1">
+                            <strong>Prediksi:</strong>
+                            <span class="text-primary fw-bold">
+                                {{ result }}
+                            </span>
+                        </p>
+                        <p class="mb-0">
+                            <strong>Tingkat Kepercayaan:</strong>
+                            <span class="text-success fw-bold">
+                                {{ (confidence * 100) | round(2) }}%
+                            </span>
+                        </p>
+                    </div>
+
+                    <p class="text-danger small mt-3">
+                        ⚠️ Aplikasi ini hanya untuk skrining awal,
+                        bukan pengganti diagnosis tenaga medis.
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<!-- ================= JAVASCRIPT ================= -->
+<script>
+const fileInput = document.getElementById("fileInput");
+const fileName = document.getElementById("fileName");
+const imagePreview = document.getElementById("imagePreview");
+const uploadPlaceholder = document.getElementById("uploadPlaceholder");
+const form = document.getElementById("predictForm");
+const loading = document.getElementById("loading");
+const submitBtn = document.getElementById("submitBtn");
+
+fileInput.addEventListener("change", function () {
+    if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            imagePreview.src = e.target.result;
+            imagePreview.classList.remove("d-none");
+            uploadPlaceholder.classList.add("d-none");
+            fileName.textContent = fileInput.files[0].name;
+        };
+        reader.readAsDataURL(this.files[0]);
+    }
+});
+
+form.addEventListener("submit", function () {
+    loading.classList.remove("d-none");
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = "Memproses...";
+});
+</script>
+
+{% endblock %}

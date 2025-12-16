@@ -1,6 +1,25 @@
-<h2>Tata Cara Penggunaan</h2>
-<ol>
-  <li>Upload citra CT Scan ginjal</li>
-  <li>Sistem memproses menggunakan CNN</li>
-  <li>Hasil klasifikasi ditampilkan</li>
-</ol>
+{% extends "base.html" %}
+{% block content %}
+
+<section class="section bg-white">
+  <div class="container">
+    <h2>Panduan Penggunaan</h2>
+    <ol>
+      <li>Buka menu Deteksi</li>
+      <li>Unggah citra CT Scan ginjal</li>
+      <li>Klik tombol Analisis</li>
+      <li>Lihat hasil prediksi</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section bg-light">
+  <div class="container">
+    <p>
+      Hasil prediksi bersifat edukatif dan sebaiknya
+      dikonsultasikan dengan tenaga medis.
+    </p>
+  </div>
+</section>
+
+{% endblock %}

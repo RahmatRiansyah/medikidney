@@ -1,3 +1,116 @@
-<h1>Medikidney</h1>
-<p>Aplikasi deteksi batu ginjal berbasis CT Scan menggunakan CNN.</p>
-<a href="/predict">Mulai Deteksi</a>
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero-section text-center d-flex align-items-center">
+    <div class="container">
+        <div class="d-inline-block bg-light-blue text-primary px-3 py-2 rounded-pill fw-bold mb-4 small-badge">
+            Diagnosis Medis Berbasis AI
+        </div>
+        
+        <h1 class="display-4 fw-bold mb-3 text-dark">
+            Sistem Deteksi Penyakit Ginjal <br>
+            <span class="text-primary">Tingkat Lanjut</span>
+        </h1>
+        
+        <p class="lead text-muted mx-auto mb-5" style="max-width: 750px;">
+            Manfaatkan teknologi deep learning terkini untuk mengklasifikasikan citra ginjal dari CT scan atau MRI. 
+            Dapatkan prediksi akurat dalam hitungan detik dengan model AI bertenaga EfficientNetB1 kami.
+        </p>
+        
+        <div class="d-flex justify-content-center gap-3">
+            <a href="/predict" class="btn btn-dark btn-lg px-5 py-3">Mulai Diagnosis</a>
+            <a href="/history" class="btn btn-outline-secondary btn-lg px-5 py-3">Lihat Riwayat</a>
+        </div>
+    </div>
+</section>
+
+<section class="how-it-works bg-light-gray py-5">
+    <div class="container py-5 text-center">
+        <h2 class="fw-bold mb-2">Cara Kerja</h2>
+        <p class="text-muted mb-5">Diagnosis simpel, cepat, dan akurat dalam tiga langkah</p>
+        
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="step-card">
+                    <div class="step-circle bg-primary text-white mb-4 mx-auto">1</div>
+                    <h5 class="fw-bold">Unggah Gambar</h5>
+                    <p class="text-muted small px-4">Upload a kidney CT scan or MRI image (JPG or PNG format)</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="step-card">
+                    <div class="step-circle bg-primary text-white mb-4 mx-auto">2</div>
+                    <h5 class="fw-bold">Analisis AI</h5>
+                    <p class="text-muted small px-4">Our AI model analyzes the image using deep learning</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="step-card">
+                    <div class="step-circle bg-primary text-white mb-4 mx-auto">3</div>
+                    <h5 class="fw-bold">Dapatkan Hasil</h5>
+                    <p class="text-muted small px-4">Receive detailed predictions with confidence levels</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <a href="/predict" class="btn btn-dark px-5 py-2">Coba Sekarang</a>
+        </div>
+    </div>
+</section>
+
+<section class="features-section py-5 bg-white">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Mengapa Memilih MediKidney?</h2>
+            <p class="text-muted">Advanced technology for accurate and rapid diagnosis</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="feature-card p-4 text-center h-100 rounded-4 border shadow-sm">
+                    <div class="icon-circle bg-light-blue text-primary mb-3 mx-auto">
+                        <i class="fas fa-brain fa-lg"></i>
+                    </div>
+                    <h6 class="fw-bold mb-3">Akurasi Tinggi</h6>
+                    <p class="text-muted small">Achieves 90%+ accuracy using transfer learning with EfficientNetB1 architecture</p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="feature-card p-4 text-center h-100 rounded-4 border shadow-sm">
+                    <div class="icon-circle bg-light-green text-success mb-3 mx-auto">
+                        <i class="fas fa-bolt fa-lg"></i>
+                    </div>
+                    <h6 class="fw-bold mb-3">Hasil Cepat</h6>
+                    <p class="text-muted small">Get prediction results in less than 3 seconds after image upload</p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="feature-card p-4 text-center h-100 rounded-4 border shadow-sm">
+                    <div class="icon-circle bg-light-purple text-purple mb-3 mx-auto">
+                        <i class="fas fa-wave-square fa-lg"></i>
+                    </div>
+                    <h6 class="fw-bold mb-3">Deteksi 2 Kelas</h6>
+                    <p class="text-muted small">Classifies images into Normal or Kidney Stone categories</p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="feature-card p-4 text-center h-100 rounded-4 border shadow-sm">
+                    <div class="icon-circle bg-light-orange text-orange mb-3 mx-auto">
+                        <i class="fas fa-shield-alt fa-lg"></i>
+                    </div>
+                    <h6 class="fw-bold mb-3">Standar Klinis</h6>
+                    <p class="text-muted small">Provides a reliable second opinion for healthcare professionals</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
