@@ -5,59 +5,75 @@
 <section class="hero-section text-center d-flex align-items-center">
     <div class="container">
         <div class="d-inline-block bg-light-blue text-primary px-3 py-2 rounded-pill fw-bold mb-4 small-badge">
-            Diagnosis Medis Berbasis AI
+            Sistem Pendukung Keputusan Medis Berbasis AI
         </div>
         
         <h1 class="display-4 fw-bold mb-3 text-dark">
-            Sistem Deteksi Penyakit Ginjal <br>
-            <span class="text-primary">Tingkat Lanjut</span>
+            Sistem Klasifikasi <br>
+            <span class="text-primary">Citra Ginjal Berbasis Deep Learning</span>
         </h1>
         
-        <p class="lead text-muted mx-auto mb-5" style="max-width: 750px;">
-            Manfaatkan teknologi deep learning terkini untuk mengklasifikasikan citra ginjal dari CT scan atau MRI. 
-            Dapatkan prediksi akurat dalam hitungan detik dengan model AI bertenaga EfficientNetB1 kami.
+        <p class="lead text-muted mx-auto mb-5" style="max-width: 780px;">
+            MediKidney merupakan sistem berbasis kecerdasan buatan yang dirancang untuk membantu tenaga medis
+            dalam mengklasifikasikan citra ginjal dari CT scan atau MRI menjadi dua kategori utama,
+            yaitu <strong>Normal</strong> dan <strong>Batu Ginjal</strong>, secara cepat dan konsisten.
         </p>
         
         <div class="d-flex justify-content-center gap-3">
-            <a href="/predict" class="btn btn-dark btn-lg px-5 py-3">Mulai Diagnosis</a>
-            <a href="/history" class="btn btn-outline-secondary btn-lg px-5 py-3">Lihat Riwayat</a>
+            <a href="/predict" class="btn btn-dark btn-lg px-5 py-3">
+                Mulai Diagnosis
+            </a>
+            <a href="/history" class="btn btn-outline-secondary btn-lg px-5 py-3">
+                Lihat Riwayat
+            </a>
         </div>
     </div>
 </section>
 
 <section class="how-it-works bg-light-gray py-5">
     <div class="container py-5 text-center">
-        <h2 class="fw-bold mb-2">Cara Kerja</h2>
-        <p class="text-muted mb-5">Diagnosis simpel, cepat, dan akurat dalam tiga langkah</p>
+        <h2 class="fw-bold mb-2">Alur Sistem</h2>
+        <p class="text-muted mb-5">
+            Proses klasifikasi citra dilakukan secara sistematis melalui tiga tahap utama
+        </p>
         
         <div class="row g-4 justify-content-center">
             <div class="col-md-4">
                 <div class="step-card">
                     <div class="step-circle bg-primary text-white mb-4 mx-auto">1</div>
-                    <h5 class="fw-bold">Unggah Gambar</h5>
-                    <p class="text-muted small px-4">Upload a kidney CT scan or MRI image (JPG or PNG format)</p>
+                    <h5 class="fw-bold">Unggah Citra</h5>
+                    <p class="text-muted small px-4">
+                        Dokter mengunggah citra CT scan atau MRI ginjal dalam format JPG atau PNG
+                    </p>
                 </div>
             </div>
             
             <div class="col-md-4">
                 <div class="step-card">
                     <div class="step-circle bg-primary text-white mb-4 mx-auto">2</div>
-                    <h5 class="fw-bold">Analisis AI</h5>
-                    <p class="text-muted small px-4">Our AI model analyzes the image using deep learning</p>
+                    <h5 class="fw-bold">Analisis Model CNN</h5>
+                    <p class="text-muted small px-4">
+                        Citra diproses dan dianalisis menggunakan model Convolutional Neural Network
+                        berbasis arsitektur DenseNet
+                    </p>
                 </div>
             </div>
             
             <div class="col-md-4">
                 <div class="step-card">
                     <div class="step-circle bg-primary text-white mb-4 mx-auto">3</div>
-                    <h5 class="fw-bold">Dapatkan Hasil</h5>
-                    <p class="text-muted small px-4">Receive detailed predictions with confidence levels</p>
+                    <h5 class="fw-bold">Hasil Klasifikasi</h5>
+                    <p class="text-muted small px-4">
+                        Sistem menampilkan hasil klasifikasi beserta tingkat kepercayaan prediksi
+                    </p>
                 </div>
             </div>
         </div>
 
         <div class="mt-5">
-            <a href="/predict" class="btn btn-dark px-5 py-2">Coba Sekarang</a>
+            <a href="/predict" class="btn btn-dark px-5 py-2">
+                Coba Sekarang
+            </a>
         </div>
     </div>
 </section>
@@ -65,8 +81,10 @@
 <section class="features-section py-5 bg-white">
     <div class="container py-5">
         <div class="text-center mb-5">
-            <h2 class="fw-bold">Mengapa Memilih MediKidney?</h2>
-            <p class="text-muted">Advanced technology for accurate and rapid diagnosis</p>
+            <h2 class="fw-bold">Keunggulan Sistem MediKidney</h2>
+            <p class="text-muted">
+                Dirancang untuk mendukung proses skrining medis berbasis citra
+            </p>
         </div>
 
         <div class="row g-4">
@@ -75,8 +93,11 @@
                     <div class="icon-circle bg-light-blue text-primary mb-3 mx-auto">
                         <i class="fas fa-brain fa-lg"></i>
                     </div>
-                    <h6 class="fw-bold mb-3">Akurasi Tinggi</h6>
-                    <p class="text-muted small">Achieves 90%+ accuracy using transfer learning with EfficientNetB1 architecture</p>
+                    <h6 class="fw-bold mb-3">Deep Learning CNN</h6>
+                    <p class="text-muted small">
+                        Menggunakan model Convolutional Neural Network dengan arsitektur DenseNet
+                        untuk ekstraksi fitur citra medis
+                    </p>
                 </div>
             </div>
 
@@ -85,28 +106,37 @@
                     <div class="icon-circle bg-light-green text-success mb-3 mx-auto">
                         <i class="fas fa-bolt fa-lg"></i>
                     </div>
-                    <h6 class="fw-bold mb-3">Hasil Cepat</h6>
-                    <p class="text-muted small">Get prediction results in less than 3 seconds after image upload</p>
+                    <h6 class="fw-bold mb-3">Proses Cepat</h6>
+                    <p class="text-muted small">
+                        Proses klasifikasi dilakukan secara otomatis dan menghasilkan prediksi
+                        dalam waktu singkat
+                    </p>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-6">
                 <div class="feature-card p-4 text-center h-100 rounded-4 border shadow-sm">
                     <div class="icon-circle bg-light-purple text-purple mb-3 mx-auto">
-                        <i class="fas fa-wave-square fa-lg"></i>
+                        <i class="fas fa-layer-group fa-lg"></i>
                     </div>
-                    <h6 class="fw-bold mb-3">Deteksi 2 Kelas</h6>
-                    <p class="text-muted small">Classifies images into Normal or Kidney Stone categories</p>
+                    <h6 class="fw-bold mb-3">Klasifikasi Dua Kelas</h6>
+                    <p class="text-muted small">
+                        Mengklasifikasikan citra ginjal ke dalam dua kategori utama:
+                        Normal dan Batu Ginjal
+                    </p>
                 </div>
             </div>
 
             <div class="col-lg-3 col-md-6">
                 <div class="feature-card p-4 text-center h-100 rounded-4 border shadow-sm">
                     <div class="icon-circle bg-light-orange text-orange mb-3 mx-auto">
-                        <i class="fas fa-shield-alt fa-lg"></i>
+                        <i class="fas fa-user-md fa-lg"></i>
                     </div>
-                    <h6 class="fw-bold mb-3">Standar Klinis</h6>
-                    <p class="text-muted small">Provides a reliable second opinion for healthcare professionals</p>
+                    <h6 class="fw-bold mb-3">Dukungan Klinis</h6>
+                    <p class="text-muted small">
+                        Ditujukan sebagai alat bantu skrining awal bagi tenaga medis,
+                        bukan sebagai pengganti diagnosis dokter
+                    </p>
                 </div>
             </div>
         </div>

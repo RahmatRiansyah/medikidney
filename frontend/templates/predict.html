@@ -11,7 +11,7 @@
 
     <div class="row g-4">
 
-        <!-- ================= UPLOAD (KIRI) ================= -->
+        <!-- LEFT -->
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm rounded-4 upload-card p-3">
                 <div class="card-body">
@@ -21,29 +21,17 @@
                     </p>
 
                     <form method="post" enctype="multipart/form-data" id="predictForm">
-                        
-                        <div class="upload-area text-center p-5 rounded-3 position-relative">
-                            
-                            <!-- PREVIEW IMAGE -->
+                        <div class="upload-area text-center p-5 rounded-3">
                             <img id="imagePreview"
                                  class="img-fluid rounded shadow-sm mb-3 d-none"
-                                 style="max-height: 220px;" />
+                                 style="max-height:220px;" />
 
-                            <!-- PLACEHOLDER -->
                             <div id="uploadPlaceholder">
-                                <div class="mb-3">
-                                    <i class="far fa-file-image fa-3x text-secondary"></i>
-                                </div>
-                                <h5 class="fw-bold text-dark">Drop your image here</h5>
-                                <p class="text-muted small mb-1">
-                                    atau klik untuk mencari file
-                                </p>
-                                <p class="text-muted small">
-                                    JPG / PNG
-                                </p>
+                                <i class="far fa-file-image fa-3x text-secondary mb-3"></i>
+                                <h5 class="fw-bold">Drop your image here</h5>
+                                <p class="text-muted small">JPG / PNG</p>
                             </div>
 
-                            <!-- FILE INPUT -->
                             <input class="form-control"
                                    type="file"
                                    name="file"
@@ -52,22 +40,19 @@
                                    required>
                         </div>
 
-                        <!-- FILE NAME -->
                         <p class="text-muted small mt-2" id="fileName">
                             Belum ada file dipilih
                         </p>
 
-                        <!-- SUBMIT -->
                         <div class="d-grid mt-3">
                             <button type="submit"
-                                    class="btn btn-secondary py-3 rounded-3 fw-bold btn-gray-upload"
+                                    class="btn btn-secondary py-3 fw-bold"
                                     id="submitBtn">
                                 <i class="fas fa-upload me-2"></i> Mulai Analisis
                             </button>
                         </div>
                     </form>
 
-                    <!-- LOADING -->
                     <div id="loading" class="text-center mt-3 d-none">
                         <div class="spinner-border text-primary"></div>
                         <p class="small text-muted mt-2">
@@ -78,46 +63,43 @@
             </div>
         </div>
 
-        <!-- ================= HASIL (KANAN) ================= -->
+        <!-- RIGHT -->
         <div class="col-lg-6">
 
-            {% if not result %}
-            <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white">
-                <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
-                    <i class="far fa-file fa-5x text-light-gray mb-3"></i>
-                    <h5 class="fw-bold text-muted">Belum Ada Hasil</h5>
-                    <p class="text-muted">
-                        Unggah gambar dan mulai analisis untuk melihat hasil
-                    </p>
+            {% if error_message %}
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-exclamation-triangle fa-4x text-warning mb-3"></i>
+                    <h5 class="fw-bold text-danger">Citra Tidak Valid</h5>
+                    <p class="text-muted">{{ error_message | safe }}</p>
                 </div>
             </div>
-            {% endif %}
 
-            {% if result %}
-            <div class="card border-0 shadow-sm rounded-4 p-4 h-100 bg-white">
+            {% elif result %}
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
                 <div class="card-body">
                     <h5 class="fw-bold mb-3 text-success">
                         <i class="fas fa-check-circle me-2"></i> Hasil Analisis
                     </h5>
 
-                    <div class="alert bg-light-blue border-0 py-3">
-                        <p class="mb-1">
-                            <strong>Prediksi:</strong>
-                            <span class="text-primary fw-bold">
-                                {{ result }}
-                            </span>
-                        </p>
-                        <p class="mb-0">
-                            <strong>Tingkat Kepercayaan:</strong>
-                            <span class="text-success fw-bold">
-                                {{ (confidence * 100) | round(2) }}%
-                            </span>
-                        </p>
+                    <div class="alert bg-light-blue border-0">
+                        <p><strong>Prediksi:</strong> {{ result }}</p>
+                        <p><strong>Kepercayaan:</strong> {{ confidence }}%</p>
                     </div>
 
-                    <p class="text-danger small mt-3">
-                        ⚠️ Aplikasi ini hanya untuk skrining awal,
-                        bukan pengganti diagnosis tenaga medis.
+                    <p class="text-danger small">
+                        ⚠️ Sistem ini hanya digunakan sebagai alat bantu skrining awal dan tidak menggantikan diagnosis dokter spesialis.
+                    </p>
+                </div>
+            </div>
+
+            {% else %}
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <div class="card-body text-center">
+                    <i class="far fa-file fa-4x text-light-gray mb-3"></i>
+                    <h5 class="fw-bold text-muted">Belum Ada Hasil</h5>
+                    <p class="text-muted">
+                        Unggah gambar dan mulai analisis
                     </p>
                 </div>
             </div>
@@ -127,33 +109,30 @@
     </div>
 </div>
 
-<!-- ================= JAVASCRIPT ================= -->
 <script>
 const fileInput = document.getElementById("fileInput");
-const fileName = document.getElementById("fileName");
 const imagePreview = document.getElementById("imagePreview");
 const uploadPlaceholder = document.getElementById("uploadPlaceholder");
-const form = document.getElementById("predictForm");
+const fileName = document.getElementById("fileName");
 const loading = document.getElementById("loading");
 const submitBtn = document.getElementById("submitBtn");
 
-fileInput.addEventListener("change", function () {
-    if (this.files && this.files[0]) {
+fileInput.addEventListener("change", () => {
+    if (fileInput.files[0]) {
         const reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = e => {
             imagePreview.src = e.target.result;
             imagePreview.classList.remove("d-none");
             uploadPlaceholder.classList.add("d-none");
             fileName.textContent = fileInput.files[0].name;
         };
-        reader.readAsDataURL(this.files[0]);
+        reader.readAsDataURL(fileInput.files[0]);
     }
 });
 
-form.addEventListener("submit", function () {
+document.getElementById("predictForm").addEventListener("submit", () => {
     loading.classList.remove("d-none");
     submitBtn.disabled = true;
-    submitBtn.innerHTML = "Memproses...";
 });
 </script>
 
