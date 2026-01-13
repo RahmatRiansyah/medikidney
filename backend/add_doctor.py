@@ -8,9 +8,9 @@ DB_PATH = os.path.join(BASE_DIR, "..", "instance", "medikidney.db")
 conn = sqlite3.connect(DB_PATH)
 cursor = conn.cursor()
 
-username = "dokter1"
+username = "dokter2"
 password = "medikidney123"
-full_name = "Dr. Demo Spesialis Urologi"
+full_name = "Dr. Rara"
 role = "doctor"
 
 hashed_password = generate_password_hash(password)

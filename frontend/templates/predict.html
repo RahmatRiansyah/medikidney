@@ -11,28 +11,42 @@
 
     <div class="row g-4">
 
-        <!-- LEFT -->
+        <!-- LEFT : FORM -->
         <div class="col-lg-6">
-            <div class="card border-0 shadow-sm rounded-4 upload-card p-3">
+            <div class="card border-0 shadow-sm rounded-4 p-4">
                 <div class="card-body">
+
                     <h5 class="fw-bold mb-1">Unggah Citra Ginjal</h5>
                     <p class="text-muted small mb-4">
-                        Unggah CT scan atau MRI image untuk dianalisis
+                        Unggah citra CT Scan atau MRI ginjal untuk dianalisis
                     </p>
 
+                    <!-- FORM START -->
                     <form method="post" enctype="multipart/form-data" id="predictForm">
-                        <div class="upload-area text-center p-5 rounded-3">
+
+                        <!-- NAMA PASIEN -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Nama Pasien</label>
+                            <input type="text"
+                                   name="patient_name"
+                                   class="form-control"
+                                   placeholder="Contoh: Budi Santoso"
+                                   required>
+                        </div>
+
+                        <!-- UPLOAD AREA -->
+                        <div class="upload-area text-center p-4 rounded-3 border mb-3">
                             <img id="imagePreview"
                                  class="img-fluid rounded shadow-sm mb-3 d-none"
                                  style="max-height:220px;" />
 
                             <div id="uploadPlaceholder">
                                 <i class="far fa-file-image fa-3x text-secondary mb-3"></i>
-                                <h5 class="fw-bold">Drop your image here</h5>
-                                <p class="text-muted small">JPG / PNG</p>
+                                <h6 class="fw-bold">Pilih atau Drop Gambar</h6>
+                                <p class="text-muted small mb-2">Format JPG / PNG</p>
                             </div>
 
-                            <input class="form-control"
+                            <input class="form-control mt-2"
                                    type="file"
                                    name="file"
                                    id="fileInput"
@@ -40,18 +54,21 @@
                                    required>
                         </div>
 
-                        <p class="text-muted small mt-2" id="fileName">
+                        <p class="text-muted small" id="fileName">
                             Belum ada file dipilih
                         </p>
 
+                        <!-- SUBMIT -->
                         <div class="d-grid mt-3">
                             <button type="submit"
-                                    class="btn btn-secondary py-3 fw-bold"
+                                    class="btn btn-dark py-3 fw-bold"
                                     id="submitBtn">
-                                <i class="fas fa-upload me-2"></i> Mulai Analisis
+                                <i class="fas fa-microscope me-2"></i>
+                                Mulai Analisis
                             </button>
                         </div>
                     </form>
+                    <!-- FORM END -->
 
                     <div id="loading" class="text-center mt-3 d-none">
                         <div class="spinner-border text-primary"></div>
@@ -59,11 +76,12 @@
                             Sedang menganalisis citra...
                         </p>
                     </div>
+
                 </div>
             </div>
         </div>
 
-        <!-- RIGHT -->
+        <!-- RIGHT : RESULT -->
         <div class="col-lg-6">
 
             {% if error_message %}
@@ -79,16 +97,22 @@
             <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
                 <div class="card-body">
                     <h5 class="fw-bold mb-3 text-success">
-                        <i class="fas fa-check-circle me-2"></i> Hasil Analisis
+                        <i class="fas fa-check-circle me-2"></i>
+                        Hasil Analisis
                     </h5>
 
                     <div class="alert bg-light-blue border-0">
-                        <p><strong>Prediksi:</strong> {{ result }}</p>
-                        <p><strong>Kepercayaan:</strong> {{ confidence }}%</p>
+                        <p class="mb-2">
+                            <strong>Prediksi:</strong> {{ result }}
+                        </p>
+                        <p class="mb-0">
+                            <strong>Kepercayaan:</strong> {{ confidence }}%
+                        </p>
                     </div>
 
-                    <p class="text-danger small">
-                        ⚠️ Sistem ini hanya digunakan sebagai alat bantu skrining awal dan tidak menggantikan diagnosis dokter spesialis.
+                    <p class="text-danger small mt-3">
+                        ⚠️ Sistem ini hanya digunakan sebagai alat bantu skrining awal
+                        dan tidak menggantikan diagnosis dokter spesialis.
                     </p>
                 </div>
             </div>
@@ -96,10 +120,10 @@
             {% else %}
             <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
                 <div class="card-body text-center">
-                    <i class="far fa-file fa-4x text-light-gray mb-3"></i>
-                    <h5 class="fw-bold text-muted">Belum Ada Hasil</h5>
-                    <p class="text-muted">
-                        Unggah gambar dan mulai analisis
+                    <i class="far fa-file fa-4x text-muted mb-3"></i>
+                    <h6 class="fw-bold text-muted">Belum Ada Hasil</h6>
+                    <p class="text-muted small">
+                        Silakan unggah gambar untuk memulai analisis
                     </p>
                 </div>
             </div>

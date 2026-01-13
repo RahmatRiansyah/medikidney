@@ -21,10 +21,14 @@
   <div class="container">
 
     <!-- LOGO -->
-    <a class="navbar-brand d-flex align-items-center fw-bold" href="{{ url_for('home') }}">
-      <i class="fas fa-heartbeat text-primary me-2 fa-lg"></i>
+    <a class="navbar-brand d-flex align-items-center fw-bold" href="/">
+      <img src="{{ url_for('static', filename='img/mk-logo.png') }}"
+           alt="MediKidney Logo"
+           style="height:38px;"
+           class="me-2">
       MediKidney
     </a>
+
 
     <!-- TOGGLER -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -67,11 +71,6 @@
         {% else %}
 
           <!-- LOGIN -->
-          <li class="nav-item">
-            <a class="btn btn-dark px-4" href="{{ url_for('login') }}">
-              <i class="fas fa-sign-in-alt me-1"></i> Login Dokter
-            </a>
-          </li>
 
         {% endif %}
 
@@ -91,7 +90,7 @@
   <div class="container text-center text-muted small">
     &copy; 2025 <strong>MediKidney</strong> — Sistem Diagnosis AI Ginjal  
     <br>
-    Dikembangkan oleh Rahmat Riansyah
+    Dikembangkan oleh Bliss.com
   </div>
 </footer>
 
